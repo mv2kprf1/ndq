@@ -3,14 +3,7 @@ schemas:
   - schema: test_schema_name
     tables:
       table_1:
-        expect_no_unexpected_rows:
-          columns: ["test_column_1"]
-          mostly: 0.9
+        no_missing_ids:
+          mostly: 0.9 # 90% records must pass this check         
           sql: |
-            select 1 = 1
-        another_check:
-          columns: ["col_2"]
-          threshold: 0.8
-      table_2:
-        some_other_check:
-          columns: ["id"]
+            SELECT * FROM test_schema_name.table_1 t WHERE t.id IS NULL

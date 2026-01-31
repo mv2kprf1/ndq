@@ -11,20 +11,19 @@ pub enum ArgValue {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct SuiteConfig<T> {
-    source: String,
-    pub schemas: Vec<SchemaExpression<T>>,
+pub struct SuiteConfig {
+    pub source: String,
+    pub schemas: Vec<SchemaExpression>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct SchemaExpression<T> {
+pub struct SchemaExpression {
     pub schema: String,
-    pub tables: HashMap<String, HashMap<String, TableExpression<T>>>,
+    pub tables: HashMap<String, HashMap<String, TableExpression>>,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct TableExpression<T> {
-    pub columns: Vec<String>,
+pub struct TableExpression {
     #[serde(flatten)]
-    pub args: HashMap<String, T>,
+    pub args: HashMap<String, ArgValue>,
 }
